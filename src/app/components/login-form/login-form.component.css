@@ -125,7 +125,7 @@
     font-size: 45px;
     color: #ff0000;
 }
-.captura-de-tela-2024-08-27-174 {
+.imagemDeCima {
     position: absolute;
     top: -1px;
     left: 19px;
@@ -134,7 +134,7 @@
     height: 264px;
     object-fit: cover;
 }
-.captura-de-tela-2024-09-04-204 {
+.imagemDeBaixo {
     position: absolute;
     top: 566px;
     left: 38px;
