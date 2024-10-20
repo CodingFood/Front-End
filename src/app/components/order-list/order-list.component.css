@@ -128,7 +128,7 @@ body {
   align-items: center;
   justify-content: center;
   width: 197px;
-  height: 22px; */
+  height: 22px;
 }
 
 .checkbox-icon {
@@ -196,5 +196,4 @@ body {
 
 .checkbox:nth-of-type(3) {
   top: 596px; /* Ajusta a posição para o terceiro checkbox */
-}
 }
