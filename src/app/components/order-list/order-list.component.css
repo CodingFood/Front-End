@@ -1,3 +1,111 @@
+<<<<<<< HEAD
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+  background-color: #f4f4f9;
+  padding: 20px;
+}
+
+.cozinha-pedidos {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.pedidos-recebidos {
+  font-size: 22px;
+  font-weight: 700;
+  color: #333;
+}
+
+.data-pedidos {
+  font-size: 14px;
+  color: #888;
+  margin-top: 8px;
+}
+
+/* Lista de pedidos */
+.pedido-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Cada pedido */
+.pedido {
+  padding: 15px;
+  background-color: #eaeaea;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pedido-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pedido-nome {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Itens do pedido */
+.itens-do-pedido {
+  list-style: none;
+  margin-left: 15px;
+}
+
+.itens-do-pedido li {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.itens-do-pedido li::before {
+  content: '•';
+  margin-right: 8px;
+  color: #333;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  accent-color: #e63946;
+  cursor: pointer;
+}
+
+.btn-aceitar-pedido {
+  margin-top: 20px;
+  padding: 15px;
+  width: 100%;
+  background-color: #e63946;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn-aceitar-pedido:hover {
+  background-color: #d62839;
+=======
 body {
   margin: 0;
   line-height: normal;
@@ -196,4 +304,5 @@ body {
 
 .checkbox:nth-of-type(3) {
   top: 596px; /* Ajusta a posição para o terceiro checkbox */
+>>>>>>> a371dc01bc2c0334c12438b9ec60c10cec1b4c82
 }

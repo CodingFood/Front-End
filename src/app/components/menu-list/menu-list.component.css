@@ -1,3 +1,141 @@
+<<<<<<< HEAD
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+    background-color: #f4f4f9;
+    padding: 20px;
+}
+
+.cardapio {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+
+.btn-voltar {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.material-icons {
+    font-size: 24px;
+    color: #000;
+}
+
+.pesquisar-container {
+    display: flex;
+    align-items: center;
+    background-color: #f0f0f0;
+    border-radius: 20px;
+    padding: 8px;
+    margin-bottom: 20px;
+}
+
+.pesquisar {
+    border: none;
+    background-color: transparent;
+    outline: none;
+    flex-grow: 1;
+    font-size: 16px;
+    padding-left: 10px;
+}
+
+.search-icon {
+    font-size: 24px;
+    color: #888;
+}
+
+.item-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    justify-content: space-between;
+}
+
+.item-imagem {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+.item-descricao {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.item-nome {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+
+.item-preco {
+    font-size: 14px;
+    color: #888;
+}
+
+.checkbox {
+    width: 20px;
+    height: 20px;
+    accent-color: #e63946;
+    cursor: pointer;
+}
+
+.adicionar-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.btn-adicionar {
+    background-color: #e63946;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.btn-adicionar span {
+    display: inline-block;
+}
+=======
 .cardpio-child {
     position: absolute;
     top: 63px;
@@ -248,3 +386,4 @@ body {
     line-height: normal;
 }
 
+>>>>>>> a371dc01bc2c0334c12438b9ec60c10cec1b4c82
