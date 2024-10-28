@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+    
+    <!-- Estilos e fontes -->
+    <link rel="stylesheet" href="./menu-list.component.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Podkova:wght@400&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500&display=swap" />
+    
+    <title>Cardápio</title>
+</head>
+<body>
+    
+    <div class="cardapio">
+        <div class="header">
+          <button class="btn-voltar">
+            <span class="material-icons">keyboard_return</span>
+          </button>
+        </div>
+      
+        <div class="pesquisar-container">
+          <input type="text" class="pesquisar" placeholder="Pesquisar">
+          <span class="material-icons search-icon">search</span>
+        </div>
+      
+        <div class="item-lista">
+          <div class="item" data-preco="39.00">
+            <img src="/src/assets/imagens/hamburguerCardapio.png" alt="Big Salad" class="item-imagem">
+            <div class="item-descricao">
+              <div class="item-nome">Big Salad</div>
+              <div class="item-preco">R$: 39,00</div>
+            </div>
+            <input type="checkbox" class="checkbox" (change)="atualizarPreco()">
+          </div>
+      
+          <div class="item" data-preco="8.00">
+            <img src="/src/assets/imagens/cocaCola.png" alt="Coca Cola" class="item-imagem">
+            <div class="item-descricao">
+              <div class="item-nome">Coca Cola</div>
+              <div class="item-preco">R$: 8,00</div>
+            </div>
+            <input type="checkbox" class="checkbox" (change)="atualizarPreco()">
+          </div>
+      
+          <div class="item" data-preco="29.00">
+            <img src="/src/assets/imagens/acaiCardapio.png" alt="Açaí Grande" class="item-imagem">
+            <div class="item-descricao">
+              <div class="item-nome">Açaí Grande</div>
+              <div class="item-preco">R$: 29,00</div>
+            </div>
+            <input type="checkbox" class="checkbox" (change)="atualizarPreco()">
+          </div>
+        </div>
+      
+        <div class="adicionar-item">
+          <button class="btn-adicionar">
+            <span>Adicionar</span>
+            <span>{{ totalPreco }}</span>
+          </button>
+        </div>
+      </div>
+      
+</body>
+</html>
