@@ -1,0 +1,48 @@
+<div class="cardpio">
+  <!-- Barra de pesquisa -->
+  <div class="rectangle-parent">
+    <div class="group-child"></div>
+    <input type="text" placeholder="Pesquisar pratos" [(ngModel)]="searchTerm" (input)="filterDishes()" class="pesquisar" />
+  </div>
+
+  <!-- Bem-vindo -->
+  <h2>Bem-vindo, {{ customerName }}!</h2> <!-- Exibe o nome do cliente capturado -->
+
+  <!-- Lista de produtos disponíveis -->
+  <div *ngIf="filteredDishes.length > 0" class="group-parent">
+    <ul>
+      <li *ngFor="let dish of filteredDishes" class="big-salad-parent">
+        <input type="checkbox" (change)="toggleDishSelection(dish)" class="checkbox-icon" />
+        <div class="big-salad">{{ dish.name }}</div>
+        <div class="r-3900">R$ {{ dish.price | number:'1.2-2' }}</div>
+      </li>
+    </ul>
+
+    <!-- Exibir valor total -->
+    <h4>Total: R$ {{ totalValue | number:'1.2-2' }}</h4>
+  </div>
+
+  <!-- Exibir mensagem caso não haja pratos disponíveis -->
+  <div *ngIf="filteredDishes.length === 0">
+    <p>Nenhum prato encontrado.</p>
+  </div>
+
+ <!-- Botão para enviar pedido -->
+<div class="rectangle-group">
+  <div class="group-item">
+    <button class="adicionar" (click)="submitOrder()">Adicionar</button>
+    <span class="r-7600">R$ {{ totalValue | number:'1.2-2' }}</span>
+  </div>
+</div>
+
+
+  <!-- Exibir o status do pedido após o envio -->
+  <div *ngIf="currentPedidoId">
+    <h3>Status do Pedido</h3>
+    <p>ID do Pedido: {{ currentPedidoId }}</p>
+    <p>Status Atual: {{ pedidoStatus }}</p>
+
+    <!-- Botão para atualizar o status manualmente -->
+    <button (click)="updateOrderStatus()">Atualizar Status do Pedido</button>
+  </div>
+</div>

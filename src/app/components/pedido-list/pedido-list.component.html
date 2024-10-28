@@ -1,0 +1,38 @@
+<h2>Pedidos Recebidos</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Cliente</th>
+      <th>Produtos</th>
+      <th>Status</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pedido of pedidos">
+      <td>{{ pedido.id }}</td>
+      <td>{{ pedido.cliente || 'Cliente desconhecido' }}</td>
+
+      <td>
+        <ul>
+          <li *ngFor="let dish of pedido.dishes">{{ dish.name }}</li>
+        </ul>
+      </td>
+      <td>{{ pedido.status }}</td>
+      <td>
+        <!-- Checkbox para selecionar -->
+        <input 
+          type="checkbox" 
+          [checked]="pedidoSelecionado === pedido" 
+          (change)="togglePedidoSelecionado(pedido)" 
+          class="checkbox" 
+        />
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Botão para aceitar pedidos -->
+<button (click)="aceitarPedidos()" [disabled]="!pedidoSelecionado">Aceitar Pedido</button>

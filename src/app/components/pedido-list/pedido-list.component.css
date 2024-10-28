@@ -1,0 +1,82 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.pedidos-recebidos-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.table {
+  width: 90%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.table th, 
+.table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.table th {
+  background-color: #f4f4f4;
+}
+
+.checkbox {
+  width: 24px;
+  height: 24px;
+  accent-color: #ea1818;  /* Cor do checkbox quando selecionado */
+}
+
+.checkbox:checked {
+  background-color: #ea1818;
+}
+
+button {
+  background-color: #ea1818;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+button:hover {
+  background-color: #c71717;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  margin-bottom: 5px;
+}
+
+/* Adicionando margem no topo dos itens */
+td ul {
+  margin-top: 10px;
+}
+
+td ul li {
+  margin-bottom: 5px;
+}

@@ -1,0 +1,25 @@
+<h2>Status do Pedido</h2>
+
+<p><strong>ID do Pedido:</strong> {{ pedido?.id || 'ID não disponível' }}</p>
+
+<p><strong>Status Atual:</strong> {{ pedido?.status || 'Status não disponível' }}</p>
+
+<p><strong>Cliente:</strong> {{ pedido?.cliente ? pedido?.cliente : 'Cliente não informado' }}</p>
+
+<p><strong>Data do Pedido:</strong> {{ pedido?.dataCriacao | date: 'dd/MM/yyyy HH:mm' }}</p>
+
+<!-- Verificação robusta para pratos no pedido -->
+<div *ngIf="pedido && pedido.dishes && pedido.dishes.length > 0">
+  <h3>Produtos no pedido:</h3>
+  <ul>
+    <li *ngFor="let dish of pedido.dishes">{{ dish.name }} - R$ {{ dish.price | number:'1.2-2' }}</li>
+  </ul>
+</div>
+
+<!-- Exibe uma mensagem caso não haja pratos no pedido -->
+<div *ngIf="pedido && (!pedido.dishes || pedido.dishes.length === 0)">
+  <p>Nenhum prato foi selecionado.</p>
+</div>
+
+<!-- Botão para enviar o pedido -->
+<button (click)="enviarPedido()">Enviar Pedido</button>

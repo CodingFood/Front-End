@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DishFormComponent } from './dish-form.component';
+import { EntregadorComponent } from './entregador.component';
 
-describe('DishFormComponent', () => {
-  let component: DishFormComponent;
-  let fixture: ComponentFixture<DishFormComponent>;
+describe('EntregadorComponent', () => {
+  let component: EntregadorComponent;
+  let fixture: ComponentFixture<EntregadorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DishFormComponent]
+      imports: [EntregadorComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DishFormComponent);
+    fixture = TestBed.createComponent(EntregadorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

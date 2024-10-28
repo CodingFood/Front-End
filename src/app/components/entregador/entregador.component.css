@@ -1,0 +1,48 @@
+.pedido-card {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #f9f9f9;
+}
+
+.card-content {
+  margin-bottom: 10px;
+}
+
+.entrega-confirmacao {
+  text-align: center;
+}
+
+.pedido-detalhes {
+  background-color: #f2f2f2;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.confirmacao-icone {
+  margin: 20px 0;
+}
+
+.confirmacao-icone img {
+  width: 100px;
+  height: 100px;
+}
+
+.btn-entregue, .btn-voltar {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.btn-entregue:disabled {
+  background-color: #ccc;
+}
+
+.btn-voltar {
+  background-color: #5cb85c;
+}

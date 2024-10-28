@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DishFormComponent } from './dish-form.component';
+import { PedidoListComponent } from './pedido-list.component';
 
-describe('DishFormComponent', () => {
-  let component: DishFormComponent;
-  let fixture: ComponentFixture<DishFormComponent>;
+describe('PedidoListComponent', () => {
+  let component: PedidoListComponent;
+  let fixture: ComponentFixture<PedidoListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DishFormComponent]
+      imports: [PedidoListComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DishFormComponent);
+    fixture = TestBed.createComponent(PedidoListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

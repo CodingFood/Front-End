@@ -1,8 +1,7 @@
-// src/app/components/dish-form/dish-form.component.ts
-
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DishService, Dish } from '../../services/dish.service';
+import { DishService } from '../../services/dish.service';
+import { Dish } from '../../models/dish.model';  // Importe o modelo corretamente
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -39,11 +38,11 @@ export class DishFormComponent implements OnInit {
 
   saveDish() {
     if (this.isEdit) {
-      this.dishService.updateDish(this.dish.id!, this.dish).subscribe(() => {
+      this.dishService.update(this.dish.id!, this.dish).subscribe(() => {
         this.router.navigate(['/']);
       });
     } else {
-      this.dishService.createDish(this.dish).subscribe(() => {
+      this.dishService.create(this.dish).subscribe(() => {
         this.router.navigate(['/']);
       });
     }
