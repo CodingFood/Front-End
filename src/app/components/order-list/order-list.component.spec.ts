@@ -31,6 +31,7 @@ describe('OrderListComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelectorAll('input[type="checkbox"]').length).toBe(3);
   });
+<<<<<<< HEAD
 
   it('should display the current date in dataPedidos', () => {
     const compiled = fixture.nativeElement as HTMLElement;
@@ -42,4 +43,6 @@ describe('OrderListComponent', () => {
     const dataEsperada = `Hoje, ${dia}/${mes}/${ano}`;
     expect(compiled.querySelector('#dataPedidos')?.textContent).toBe(dataEsperada);
   });
+=======
+>>>>>>> a371dc01bc2c0334c12438b9ec60c10cec1b4c82
 });

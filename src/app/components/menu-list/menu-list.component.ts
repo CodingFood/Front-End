@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -22,4 +23,17 @@ export class MenuListComponent implements OnInit {
     
     this.totalPreco = `R$ ${total.toFixed(2)}`;
   }
+=======
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-menu-list',
+  standalone: true,
+  imports: [],
+  templateUrl: './menu-list.component.html',
+  styleUrl: './menu-list.component.css'
+})
+export class MenuListComponent {
+
+>>>>>>> a371dc01bc2c0334c12438b9ec60c10cec1b4c82
 }
