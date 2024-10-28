@@ -1,0 +1,20 @@
+<h2>Escolha seus pratos</h2>
+<ul>
+  <li *ngFor="let dish of dishes">
+    <input type="checkbox" (change)="toggleDishSelection(dish)" /> {{ dish.name }} - R$ {{ dish.price }}
+  </li>
+</ul>
+
+<h3>Total: R$ {{ totalValue }}</h3>
+
+<label for="cliente">Cliente:</label>
+<select id="cliente" [(ngModel)]="selectedCliente" required>
+  <option *ngFor="let cliente of clientes" [ngValue]="cliente">{{ cliente.nome }}</option>
+</select>
+
+<label for="cozinha">Cozinha:</label>
+<select id="cozinha" [(ngModel)]="selectedCozinha" required>
+  <option *ngFor="let cozinha of cozinhas" [ngValue]="cozinha">{{ cozinha.tipo }}</option>
+</select>
+
+<button (click)="submitOrder()" [disabled]="selectedDishes.length === 0">Finalizar Pedido</button>
