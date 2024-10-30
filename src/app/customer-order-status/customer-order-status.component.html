@@ -1,22 +1,24 @@
-<h2>Status do Pedido</h2>
+<div class="customer-order-status-container">
+  <h2>Status do Pedido</h2>
 
-<p><strong>Status Atual:</strong> {{ pedidoStatus }}</p>
-<p><strong>Data do Pedido:</strong> {{ pedido?.dataCriacao | date:'dd/MM/yyyy HH:mm' }}</p>
+  <p><strong>Status Atual:</strong> {{ pedidoStatus }}</p>
+  <p><strong>Data do Pedido:</strong> {{ pedido?.dataCriacao | date:'dd/MM/yyyy HH:mm' }}</p>
 
-<!-- Verificar se 'dishes' está definido e vazio -->
-<div *ngIf="pedido && pedido.dishes && pedido.dishes.length === 0">
-  <p>Nenhum prato foi selecionado.</p>
+  <!-- Verificar se 'dishes' está definido e vazio -->
+  <div *ngIf="pedido && pedido.dishes && pedido.dishes.length === 0">
+    <p>Nenhum prato foi selecionado.</p>
+  </div>
+
+  <!-- Verificar se há pratos selecionados -->
+  <div *ngIf="pedido && pedido.dishes && pedido.dishes.length > 0">
+    <h3>Produtos no pedido:</h3>
+    <ul>
+      <li *ngFor="let dish of pedido.dishes">{{ dish.name }} - R$ {{ dish.price | number:'1.2-2' }}</li>
+    </ul>
+  </div>
+
+   <!--<h3>Status do Pedido: {{ pedidoStatus }}</h3>-->
+
+  <!-- Botão para criar um novo pedido -->
+  <button (click)="novoPedido()">Novo Pedido</button>
 </div>
-
-<!-- Verificar se há pratos selecionados -->
-<div *ngIf="pedido && pedido.dishes && pedido.dishes.length > 0">
-  <h3>Produtos no pedido:</h3>
-  <ul>
-    <li *ngFor="let dish of pedido.dishes">{{ dish.name }} - R$ {{ dish.price | number:'1.2-2' }}</li>
-  </ul>
-</div>
-
-<h3>Status do Pedido: {{ pedidoStatus }}</h3>
-
-<!-- Botão para criar um novo pedido -->
-<button (click)="novoPedido()">Novo Pedido</button>

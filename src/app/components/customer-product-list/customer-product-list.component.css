@@ -1,159 +1,115 @@
+/* Estilo para o container principal */
 .cardpio {
   width: 100%;
-  position: relative;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  background-color: #fff;
-  height: 852px;
-  overflow: hidden;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
   text-align: center;
-  font-size: 24px;
-  color: #000;
-  font-family: 'Plus Jakarta Sans';
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
+/* Barra de pesquisa */
 .rectangle-parent {
   position: relative;
-  top: 20px;
-  width: 354px;
-  height: 56px;
-  margin: 20px auto;
+  margin-bottom: 20px;
 }
 
 .group-child {
   position: absolute;
-  top: 0px;
-  left: 0px;
-  border-radius: 20px;
-  background-color: #fff;
-  border: 2px solid #948e8e;
-  width: 354px;
-  height: 56px;
-  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 10px;
+  background-color: #ea1818;
+  z-index: 0;
 }
 
 .pesquisar {
-  position: absolute;
-  top: 10px;
-  left: 20px;
-  width: 300px;
+  position: relative;
+  width: 100%;
+  padding: 10px;
   border: none;
-  font-size: 18px;
-  background-color: transparent;
-  outline: none;
-  color: #8b8585;
+  border-radius: 5px;
+  font-size: 16px;
+  z-index: 1;
 }
 
-.search-icon {
-  position: absolute;
-  top: 13px;
-  left: 326px;
-  width: 24px;
-  height: 24px;
+/* Bem-vindo */
+h2 {
+  font-size: 24px;
+  color: #ff0000;
+  margin-bottom: 20px;
 }
 
-.group-parent {
-  margin: 20px auto;
-  width: 359px;
-  text-align: left;
+/* Lista de produtos */
+.group-parent ul {
+  list-style: none;
+  padding: 0;
 }
 
 .big-salad-parent {
-  position: relative;
-  margin-bottom: 20px;
-  padding-left: 35px;
-}
-
-.big-salad {
-  font-size: 20px;
-  line-height: 20px;
-  font-weight: 500;
-}
-
-.r-3900 {
-  font-size: 20px;
-  line-height: 20px;
-  font-weight: 500;
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-left: 10px;
-  color: #777877;
+  margin-bottom: 10px;
 }
 
 .checkbox-icon {
-  position: absolute;
-  top: 5px;
-  left: 0px;
-  width: 24px;
-  height: 24px;
+  margin-right: 10px;
 }
 
+.big-salad {
+  flex-grow: 1;
+}
+
+.r-3900 {
+  font-weight: bold;
+}
+
+/* Valor total */
+h4 {
+  margin-top: 10px;
+  color: #333;
+}
+
+/* Botão de adicionar pedido */
 .rectangle-group {
-  position: relative;
-  top: 30px;
-  margin: 20px auto;
-  width: 356px;
-  height: 56px;
-  cursor: pointer;
-  background-color: #ea1818;
-  border-radius: 10px;
-  color: #fff;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 .group-item {
   position: relative;
-  width: 356px;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 10px;
+  border-radius: 10px;
+  background-color: #d4d4d4;
+  width: 100%;
+  max-width: 250px;
+  padding: 15px;
+  text-align: center;
 }
 
 .adicionar {
+  background-color: #ea1818;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
   font-size: 18px;
-  line-height: 12px;
-  text-align: left;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.adicionar:hover {
+  background-color: #c11515;
 }
 
 .r-7600 {
-  font-size: 18px;
-  line-height: 12px;
-  text-align: right;
+  font-weight: bold;
+  color: #333;
 }
 
-h2 {
+/* Status do pedido */
+.current-pedido {
   margin-top: 20px;
-  font-size: 36px;
-  color: #ea1818;
-}
-
-h3 {
-  font-size: 24px;
-  margin-top: 20px;
-}
-
-select, input {
-  font-size: 18px;
-  padding: 10px;
-  margin: 10px 0;
-  width: calc(100% - 20px);
-  border: 1px solid #d4d4d4;
-  border-radius: 10px;
-}
-
-button {
-  width: 100%;
-  padding: 15px;
-  background-color: #ea1818;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 20px;
-  cursor: pointer;
-  margin-top: 20px;
-}
-
-button:hover {
-  background-color: #c01515;
 }

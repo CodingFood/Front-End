@@ -32,6 +32,7 @@ const routes: Routes = [
   { path: 'edit-pedido/:id', component: PedidoFormComponent },
   { path: 'pedidos', component: PedidoListComponent },
   { path: 'entregador', component: EntregadorComponent },
+  { path: 'dish-list', component: DishListComponent },
   { path: 'pedido-aceito', component: PedidoAceitoComponent }  // Certifique-se de que a rota está correta
 ];
 

@@ -1,48 +1,95 @@
-.pedido-card {
-  border: 1px solid #ddd;
-  padding: 10px;
-  margin: 10px 0;
-  background-color: #f9f9f9;
+/* Centralizar o conteúdo */
+.entregador-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
 }
 
-.card-content {
-  margin-bottom: 10px;
-}
-
-.entrega-confirmacao {
+/* Título */
+h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
   text-align: center;
 }
 
-.pedido-detalhes {
-  background-color: #f2f2f2;
-  padding: 10px;
-  margin-bottom: 20px;
-  border-radius: 5px;
+/* Estilização dos cards de pedido */
+.pedido-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f0f0f0;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.confirmacao-icone {
-  margin: 20px 0;
+/* Conteúdo do card */
+.card-content {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
 }
 
-.confirmacao-icone img {
-  width: 100px;
-  height: 100px;
+/* Checkbox alinhado à direita */
+.pedido-card input[type="checkbox"] {
+  margin-left: auto;
 }
 
-.btn-entregue, .btn-voltar {
-  background-color: #d9534f;
-  color: white;
-  border: none;
+/* Label para o checkbox */
+.pedido-card label {
+  margin-left: 10px;
+}
+
+/* Botão para marcar como entregue */
+.btn-entregue {
+  background-color: #ea1818;
+  color: #fff;
   padding: 10px 20px;
-  margin-top: 10px;
-  cursor: pointer;
+  border: none;
   border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
 }
 
 .btn-entregue:disabled {
   background-color: #ccc;
+  cursor: not-allowed;
 }
 
+/* Tela de confirmação de entrega */
+.entrega-confirmacao {
+  text-align: center;
+  padding: 20px;
+}
+
+.pedido-detalhes {
+  background-color: #f0f0f0;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 15px 0;
+}
+
+/* Ícone de confirmação */
+.confirmacao-icone img {
+  width: 50px;
+  height: 50px;
+  margin-top: 20px;
+}
+
+/* Botão de próxima entrega */
 .btn-voltar {
-  background-color: #5cb85c;
+  background-color: #ea1818;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
 }

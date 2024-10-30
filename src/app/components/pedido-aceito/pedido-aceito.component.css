@@ -1,34 +1,60 @@
+/* Estilo para o contêiner principal */
 .pedido-aceito-container {
-    margin: 20px;
-    padding: 20px;
-    background-color: #f4f4f4;
-    border-radius: 8px;
-  }
-  
-  h2 {
-    margin-bottom: 20px;
-  }
-  
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  li {
-    margin-bottom: 10px;
-  }
-  
-  button {
-    background-color: #ea1818;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.2rem;
-  }
-  
-  button:hover {
-    background-color: #c71717;
-  }
-  
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Título "Status do Pedido" */
+h2 {
+  font-size: 28px;
+  color: #ff0000;
+  margin-bottom: 20px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+}
+
+/* Estilo para as informações do pedido */
+p, h3 {
+  font-size: 18px;
+  color: #333;
+  margin: 10px 0;
+}
+
+/* Estilo para a lista de produtos */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  font-size: 16px;
+  color: #555;
+  margin: 5px 0;
+}
+
+/* Estilo do botão "Enviar Pedido" */
+button {
+  background-color: #ea1818;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+button:hover {
+  background-color: #c11515;
+}

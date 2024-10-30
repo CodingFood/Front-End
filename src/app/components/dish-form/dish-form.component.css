@@ -1,0 +1,63 @@
+/* Estilo do contêiner principal para centralizar o conteúdo */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0; /* Fundo cinza do card */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  /* Estilo do título */
+  h2 {
+    text-align: center;
+    color: #333;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilo dos rótulos */
+  label {
+    width: 100%;
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+    text-align: left;
+  }
+  
+  /* Estilo dos campos de entrada */
+  input[type="text"],
+  input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #ffffff;
+    box-sizing: border-box;
+  }
+  
+  /* Estilo do botão */
+  button {
+    background-color: #28a745; /* Verde */
+    color: #ffffff;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Efeito de hover para o botão */
+  button:hover {
+    background-color: #218838;
+  }
+  

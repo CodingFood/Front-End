@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
 }
 
 .pedidos-recebidos-container {
@@ -15,10 +16,12 @@ body {
 h2 {
   font-size: 2rem;
   margin-bottom: 20px;
+  color: #333;
 }
 
 .table {
   width: 90%;
+  max-width: 800px;
   border-collapse: collapse;
   margin-bottom: 20px;
 }
@@ -32,12 +35,13 @@ h2 {
 
 .table th {
   background-color: #f4f4f4;
+  color: #333;
 }
 
 .checkbox {
   width: 24px;
   height: 24px;
-  accent-color: #ea1818;  /* Cor do checkbox quando selecionado */
+  accent-color: #ea1818; /* Cor do checkbox quando selecionado */
 }
 
 .checkbox:checked {
@@ -51,11 +55,7 @@ button {
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 1.2rem;
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  font-size: 1rem;
 }
 
 button:hover {
@@ -72,11 +72,34 @@ li {
   margin-bottom: 5px;
 }
 
-/* Adicionando margem no topo dos itens */
 td ul {
   margin-top: 10px;
 }
 
 td ul li {
   margin-bottom: 5px;
+}
+
+/* Estilo para o botão de cadastrar novo produto */
+.btn-cadastrar-produto {
+  background-color: #007bff;
+  color: white;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-cadastrar-produto:hover {
+  background-color: #0056b3;
+}
+
+/* Estilo para o botão de aceitar pedidos */
+.btn-aceitar-pedido {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.2rem;
 }

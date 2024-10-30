@@ -34,8 +34,11 @@ export class PedidoListComponent implements OnInit {
     if (this.pedidoSelecionado === pedido) {
       // Se o pedido já está selecionado, desmarque
       this.pedidoSelecionado = null;
+      pedido.selecionado = false;
     } else {
       // Seleciona um novo pedido, desmarcando qualquer outro
+      this.pedidos.forEach(p => p.selecionado = false); // Desmarcar todos
+      pedido.selecionado = true;
       this.pedidoSelecionado = pedido;
     }
     console.log('Pedido atualmente selecionado:', this.pedidoSelecionado);
@@ -66,5 +69,10 @@ export class PedidoListComponent implements OnInit {
         console.error('Erro ao atualizar o status do pedido:', error);
       }
     );
+  }
+
+  // Função para navegar para a tela de adicionar novo produto
+  navigateToAddDish(): void {
+    this.router.navigate(['/dish-list']);
   }
 }
