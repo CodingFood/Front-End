@@ -1,17 +1,20 @@
-/* Estilo para o container principal */
+/* Estilo do container principal */
 .cardpio {
   width: 100%;
-  max-width: 600px;
+  max-width: 500px;
   margin: 0 auto;
   padding: 20px;
   text-align: center;
   font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Barra de pesquisa */
 .rectangle-parent {
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .group-child {
@@ -19,85 +22,107 @@
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
-  border-radius: 10px;
-  background-color: #ea1818;
-  z-index: 0;
+  height: 50px;
+  background-color: #f1f1f1;
+  border-radius: 25px;
 }
 
 .pesquisar {
-  position: relative;
   width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
+  height: 50px;
+  padding: 10px 20px;
   font-size: 16px;
-  z-index: 1;
+  border: none;
+  outline: none;
+  border-radius: 25px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Bem-vindo */
 h2 {
-  font-size: 24px;
   color: #ff0000;
-  margin-bottom: 20px;
+  font-size: 24px;
+  margin: 20px 0;
+  font-weight: bold;
 }
 
-/* Lista de produtos */
-.group-parent ul {
+/* Lista de produtos disponíveis */
+.group-parent {
+  text-align: left;
+}
+
+ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .big-salad-parent {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
 }
 
-.checkbox-icon {
-  margin-right: 10px;
+.dish-image {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  border-radius: 5px;
+}
+
+.dish-info {
+  flex: 1;
 }
 
 .big-salad {
-  flex-grow: 1;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .r-3900 {
-  font-weight: bold;
+  font-size: 16px;
+  color: #888;
+}
+
+/* Checkbox */
+.checkbox-icon {
+  width: 20px;
+  height: 20px;
 }
 
 /* Valor total */
 h4 {
-  margin-top: 10px;
+  margin-top: 20px;
   color: #333;
+  font-size: 18px;
 }
 
-/* Botão de adicionar pedido */
+/* Botão para enviar pedido */
 .rectangle-group {
   margin-top: 20px;
   display: flex;
+  align-items: center;
   justify-content: center;
 }
 
 .group-item {
   position: relative;
-  border-radius: 10px;
-  background-color: #d4d4d4;
   width: 100%;
-  max-width: 250px;
-  padding: 15px;
-  text-align: center;
+  max-width: 300px;
 }
 
 .adicionar {
+  width: 100%;
+  padding: 12px;
   background-color: #ea1818;
-  color: white;
-  padding: 10px;
+  color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   font-size: 18px;
+  font-weight: bold;
   cursor: pointer;
-  margin-right: 10px;
+  transition: background-color 0.3s;
 }
 
 .adicionar:hover {
@@ -105,11 +130,20 @@ h4 {
 }
 
 .r-7600 {
-  font-weight: bold;
-  color: #333;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #fff;
 }
 
 /* Status do pedido */
-.current-pedido {
-  margin-top: 20px;
+h3 {
+  color: #333;
+  margin-top: 30px;
+}
+
+p {
+  color: #666;
 }

@@ -3,4 +3,6 @@ export class Dish {
   name!: string;
   description?: string;
   price!: number;
+
+  imageUrl?: string;
 }

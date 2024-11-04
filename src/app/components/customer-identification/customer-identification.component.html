@@ -1,26 +1,28 @@
 <div class="identificacao-container">
-  <!-- Logo ou título "CodingFood" -->
-  <h2>CodingFood</h2>
-
-  <!-- Campo Nome -->
-  <div>
-    <label for="nome">Nome:</label>
-    <input type="text" id="nome" [(ngModel)]="customerName" placeholder="Digite seu nome">
-  </div>
-
-  <!-- Campo Endereço -->
-  <div>
-    <label for="endereco">Endereço:</label>
-    <input type="text" id="endereco" [(ngModel)]="customerEndereco" placeholder="Digite seu endereço">
-  </div>
-
-  <!-- Botão de Continuar -->
-  <div>
-    <button (click)="continueToProductSelection()">Continuar</button>
-  </div>
-
   <!-- Imagem de cima (caso necessário) -->
   <img src="assets/images/hamburguerCimaLogin.png" alt="imagem superior" class="imagemDeCima">
+
+  <!-- Conteúdo do formulário -->
+  <div class="form-content">
+    <h2>CodingFood</h2>
+
+    <!-- Campo Nome -->
+    <div>
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" [(ngModel)]="customerName" placeholder="Digite seu nome">
+    </div>
+
+    <!-- Campo Endereço -->
+    <div>
+      <label for="endereco">Endereço:</label>
+      <input type="text" id="endereco" [(ngModel)]="customerEndereco" placeholder="Digite seu endereço">
+    </div>
+
+    <!-- Botão de Continuar -->
+    <div>
+      <button (click)="continueToProductSelection()">Continuar</button>
+    </div>
+  </div>
 
   <!-- Imagem de baixo (caso necessário) -->
   <img src="assets/images/hamburguerAbaixo.png" alt="imagem inferior" class="imagemDeBaixo">
