@@ -15,68 +15,96 @@ import { CommonModule } from '@angular/common';
   imports: [FormsModule, CommonModule]
 })
 export class CustomerProductListComponent implements OnInit {
-
   dishes: Dish[] = [];
   filteredDishes: Dish[] = [];
   selectedDishes: Dish[] = [];
   totalValue: number = 0;
-  currentPedidoId: number | null | undefined = null;
-  pedidoStatus: string = '';
-  customerName: string = '';  // Nome do cliente vindo da tela customer-identification
-  customerAddress: string = ''; // Endereço do cliente vindo da tela anterior
-  searchTerm: string = '';  
+  searchTerm: string = '';
+  customerName: string = '';
+  customerAddress: string = '';
 
   constructor(
     private dishService: DishService,
     private pedidoService: PedidoService,
     private router: Router,
-    private route: ActivatedRoute  
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    // Receber o nome e o endereço do cliente da URL (customer-identification ou outra origem)
     this.route.queryParams.subscribe(params => {
-      this.customerName = params['name'] || 'Cliente';
-      this.customerAddress = params['endereco'] || '';  // Capturando o endereço do cliente
-      console.log(`Nome do Cliente: ${this.customerName}, Endereço: ${this.customerAddress}`);
+      this.customerName = params['name'] || '';
+      this.customerAddress = params['endereco'] || '';
     });
 
-    // Carregar os pratos disponíveis
-    this.dishService.getDishes().subscribe((data: Dish[]) => {
-      this.dishes = data;
-      this.filteredDishes = data;  
+    this.loadDishes();
+  }
+
+  loadDishes(): void {
+    this.dishService.getDishes().subscribe({
+      next: (dishes) => {
+        this.dishes = dishes;
+        this.filteredDishes = dishes;
+      },
+      error: (error) => {
+        console.error('Erro ao carregar pratos:', error);
+      }
     });
   }
 
+  getProductImage(productName: string): string {
+    const name = productName.toLowerCase();
+    
+    if (name.includes('salad') || name.includes('hamburguer')) {
+      return 'assets/images/hamburguer.png';
+    }
+    if (name.includes('coca')) {
+      return 'assets/images/coca.png';
+    }
+    if (name.includes('açaí')) {
+      return 'assets/images/acai.png';
+    }
+    if (name.includes('strogonoff')) {
+      return 'assets/images/strogonoff.png';
+    }
+    if (name.includes('lasanha')) {
+      return 'assets/images/lasanha.png';
+    }
+    return 'assets/images/default.png';
+  }
+
   filterDishes(): void {
-    const term = this.searchTerm.toLowerCase();
+    if (!this.searchTerm.trim()) {
+      this.filteredDishes = this.dishes;
+      return;
+    }
+
+    const term = this.searchTerm.toLowerCase().trim();
     this.filteredDishes = this.dishes.filter(dish =>
       dish.name.toLowerCase().includes(term)
     );
   }
 
   toggleDishSelection(dish: Dish): void {
-    const index = this.selectedDishes.indexOf(dish);
+    const index = this.selectedDishes.findIndex(d => d.id === dish.id);
+    
     if (index === -1) {
       this.selectedDishes.push(dish);
-      console.log('Prato selecionado:', dish);
     } else {
       this.selectedDishes.splice(index, 1);
-      console.log('Prato desmarcado:', dish);
     }
+    
     this.calculateTotal();
   }
 
   calculateTotal(): void {
-    this.totalValue = this.selectedDishes.reduce((total, dish) => total + dish.price, 0);
-    console.log('Valor total atualizado:', this.totalValue);
+    this.totalValue = this.selectedDishes.reduce(
+      (total, dish) => total + dish.price,
+      0
+    );
   }
 
   submitOrder(): void {
-    console.log("Botão 'Adicionar' clicado");
-
-    if (!this.customerName || this.selectedDishes.length === 0) {
-      console.log('Envio de pedido cancelado. Nome do cliente ou pratos não selecionados.');
+    if (this.selectedDishes.length === 0) {
       return;
     }
 
@@ -84,38 +112,33 @@ export class CustomerProductListComponent implements OnInit {
       dishes: this.selectedDishes,
       total: this.totalValue,
       status: 'Pendente',
-      cliente: this.customerName,  // Utiliza o campo cliente para armazenar o nome do cliente
-      endereco: this.customerAddress // Adiciona o endereço capturado
+      cliente: this.customerName,
+      endereco: this.customerAddress
     };
 
-    console.log('Pratos selecionados para envio:', this.selectedDishes);
-    console.log('Cliente selecionado:', this.customerName);
-    console.log('Endereço do cliente:', this.customerAddress);
-    console.log('Valor total:', this.totalValue);
-
-    // Enviando o pedido para o backend
-    this.pedidoService.create(pedido).subscribe(
-      (createdPedido: Pedido) => {
+    this.pedidoService.create(pedido).subscribe({
+      next: (createdPedido) => {
         if (createdPedido && createdPedido.id) {
-          this.currentPedidoId = createdPedido.id;
-          console.log('Pedido criado com sucesso:', createdPedido);
           this.router.navigate(['/customer-order-status'], {
-            queryParams: { id: createdPedido.id, name: this.customerName, endereco: this.customerAddress }
+            queryParams: {
+              id: createdPedido.id,
+              name: this.customerName,
+              endereco: this.customerAddress
+            }
           });
         }
       },
-      (error) => {
+      error: (error) => {
         console.error('Erro ao criar pedido:', error);
       }
-    );
+    });
   }
 
-  updateOrderStatus(): void {
-    if (this.currentPedidoId != null) {
-      this.pedidoService.getPedido(this.currentPedidoId).subscribe((pedido: Pedido) => {
-        this.pedidoStatus = pedido.status;
-        console.log('Status atualizado:', this.pedidoStatus);
-      });
-    }
+  voltar(): void {
+    this.router.navigate(['/customer-identification']);
+  }
+
+  isSelected(dish: Dish): boolean {
+    return this.selectedDishes.some(d => d.id === dish.id);
   }
 }

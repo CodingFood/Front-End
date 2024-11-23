@@ -1,105 +1,157 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
+/* CSS */
+.cozinha-container {
+  background-color: #ffffff;
+  min-height: 100vh;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
-.pedidos-recebidos-container {
+h1 {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: normal;
+  margin-bottom: 20px;
+}
+
+.pedidos-card {
+  background-color: white;
+  border-radius: 8px;
   padding: 20px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.pedidos-header {
+  margin-bottom: 24px;
+}
+
+.pedidos-header h2 {
+  font-size: 1rem;
+  margin: 0;
+  color: #000;
+}
+
+.data {
+  font-size: 1.1rem;
+  color: #000;
+  margin: 4px 0 0 0;
+  font-weight: 500;
+}
+
+.pedidos-list {
   display: flex;
   flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.pedido-item {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.pedido-header {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  min-height: 100vh;
+  margin-bottom: 12px;
 }
 
-h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #333;
+.pedido-title {
+  font-weight: 500;
+  color: #000;
 }
 
-.table {
-  width: 90%;
-  max-width: 800px;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-}
-
-.table th, 
-.table td {
-  border: 1px solid #ddd;
-  padding: 12px;
-  text-align: left;
-}
-
-.table th {
-  background-color: #f4f4f4;
-  color: #333;
-}
-
-.checkbox {
-  width: 24px;
-  height: 24px;
-  accent-color: #ea1818; /* Cor do checkbox quando selecionado */
-}
-
-.checkbox:checked {
-  background-color: #ea1818;
-}
-
-button {
-  background-color: #ea1818;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-}
-
-button:hover {
-  background-color: #c71717;
-}
-
-ul {
+.pedido-items {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
 
-li {
-  margin-bottom: 5px;
+.pedido-items li {
+  color: #000;
+  margin-bottom: 8px;
+  position: relative;
+  padding-left: 16px;
 }
 
-td ul {
-  margin-top: 10px;
+.pedido-items li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #000;
 }
 
-td ul li {
-  margin-bottom: 5px;
-}
-
-/* Estilo para o botão de cadastrar novo produto */
-.btn-cadastrar-produto {
-  background-color: #007bff;
-  color: white;
-  margin-bottom: 20px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  border-radius: 5px;
+.checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #e0e0e0;
+  border-radius: 4px;
+  position: relative;
   cursor: pointer;
 }
 
-.btn-cadastrar-produto:hover {
+.checkbox:checked {
+  background-color: #ff3b30;
+  border-color: #ff3b30;
+}
+
+.checkbox:checked::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.btn-aceitar {
+  background-color: #ff3b30;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 16px;
+  width: 100%;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-aceitar:disabled {
+  background-color: #ffbab7;
+  cursor: not-allowed;
+}
+
+.btn-aceitar:hover:not(:disabled) {
+  background-color: #ff1f1f;
+}
+/* ... estilos existentes ... */
+
+.btn-pratos {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-pratos:hover {
   background-color: #0056b3;
 }
 
-/* Estilo para o botão de aceitar pedidos */
-.btn-aceitar-pedido {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 1.2rem;
+.pedidos-header {
+  margin-top: 40px; /* Aumentado para dar espaço ao botão */
 }
+
+/* ... resto dos estilos existentes ... */

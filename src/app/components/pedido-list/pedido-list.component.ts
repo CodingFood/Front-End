@@ -13,65 +13,89 @@ import { Router } from '@angular/router';
   imports: [CommonModule, FormsModule]
 })
 export class PedidoListComponent implements OnInit {
-
   pedidos: Pedido[] = [];
-  pedidoSelecionado: Pedido | null = null;  // Apenas um pedido pode ser selecionado
+  pedidoSelecionado: Pedido | null = null;
+  dataAtual: Date = new Date();
 
   constructor(private pedidoService: PedidoService, private router: Router) { }
 
   ngOnInit(): void {
-    this.pedidoService.getPedidos().subscribe(data => {
-      console.log('Pedidos recebidos do backend:', data);  // Verifica os pedidos que vêm do backend
-      this.pedidos = data.map(pedido => ({
-        ...pedido,
-        selecionado: false  // Inicializa o campo 'selecionado'
-      }));
+    this.carregarPedidos();
+    // Atualizar a lista de pedidos a cada 30 segundos
+    setInterval(() => {
+      this.carregarPedidos();
+    }, 30000);
+  }
+
+  carregarPedidos(): void {
+    this.pedidoService.getPedidos().subscribe({
+      next: (data) => {
+        // Filtrar apenas pedidos com status 'Pendente' ou similar
+        this.pedidos = data
+          .filter(pedido => pedido.status === 'Pendente')
+          .map(pedido => ({
+            ...pedido,
+            selecionado: false
+          }));
+      },
+      error: (error) => {
+        console.error('Erro ao carregar pedidos:', error);
+      }
     });
   }
 
-  // Função para alternar a seleção de pedidos (apenas um selecionado por vez)
   togglePedidoSelecionado(pedido: Pedido): void {
     if (this.pedidoSelecionado === pedido) {
-      // Se o pedido já está selecionado, desmarque
       this.pedidoSelecionado = null;
       pedido.selecionado = false;
     } else {
-      // Seleciona um novo pedido, desmarcando qualquer outro
-      this.pedidos.forEach(p => p.selecionado = false); // Desmarcar todos
-      pedido.selecionado = true;
+      // Desmarcar pedido anterior se houver
+      if (this.pedidoSelecionado) {
+        this.pedidoSelecionado.selecionado = false;
+      }
+      
+      // Selecionar novo pedido
       this.pedidoSelecionado = pedido;
+      pedido.selecionado = true;
     }
-    console.log('Pedido atualmente selecionado:', this.pedidoSelecionado);
   }
 
-  // Função para aceitar o pedido selecionado e redirecionar para a tela de "Pedido Aceito"
   aceitarPedidos(): void {
     if (!this.pedidoSelecionado) {
-      console.warn('Nenhum pedido selecionado.');
       return;
     }
 
-    console.log('Pedido selecionado para aceitar:', this.pedidoSelecionado);
-
-    // Alterar o status para "Preparando"
-    this.pedidoService.updateStatus(this.pedidoSelecionado.id!, 'Preparando').subscribe(
-      (updatedPedido: Pedido) => {
-        console.log('Status atualizado para "Preparando":', updatedPedido);
-
-        // Redirecionar para a página de "Pedido Aceito"
-        this.router.navigate(['/pedido-aceito'], { queryParams: { id: this.pedidoSelecionado!.id } });
-
-        // Remover o pedido da lista localmente
-        this.pedidos = this.pedidos.filter(p => p.id !== this.pedidoSelecionado!.id);
-        this.pedidoSelecionado = null;  // Limpar a seleção
-      },
-      error => {
-        console.error('Erro ao atualizar o status do pedido:', error);
-      }
-    );
+    this.pedidoService.updateStatus(this.pedidoSelecionado.id!, 'Preparando')
+      .subscribe({
+        next: (updatedPedido) => {
+          // Redirecionar para a página de pedido aceito
+          this.router.navigate(['/pedido-aceito'], { 
+            queryParams: { id: this.pedidoSelecionado!.id } 
+          });
+          
+          // Remover o pedido da lista local
+          this.pedidos = this.pedidos.filter(p => p.id !== this.pedidoSelecionado!.id);
+          this.pedidoSelecionado = null;
+          
+          // Recarregar a lista de pedidos
+          this.carregarPedidos();
+        },
+        error: (error) => {
+          console.error('Erro ao atualizar o status do pedido:', error);
+        }
+      });
   }
 
-  // Função para navegar para a tela de adicionar novo produto
+  // Formato da data para o template
+  formatarData(data: Date): string {
+    return new Intl.DateTimeFormat('pt-BR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    }).format(data);
+  }
+
+  // Método para navegar para a tela de pratos
   navigateToAddDish(): void {
     this.router.navigate(['/dish-list']);
   }

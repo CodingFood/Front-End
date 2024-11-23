@@ -1,52 +1,47 @@
-<div class="cardpio">
-  <!-- Barra de pesquisa -->
-  <div class="rectangle-parent">
-    <div class="group-child">
-    <input type="text" placeholder="Pesquisar pratos" [(ngModel)]="searchTerm" (input)="filterDishes()" class="pesquisar" />
-  </div>
-  </div>
+<div class="product-container">
 
-  <!-- Bem-vindo -->
-  <h2>Olá, {{ customerName }}!</h2>
-
-  <!-- Lista de produtos disponíveis -->
-  <div *ngIf="filteredDishes.length > 0" class="group-parent">
-    <ul>
-      <li *ngFor="let dish of filteredDishes" class="big-salad-parent">
-        <!-- Imagem do prato -->
-        <img [src]="dish.imageUrl" alt="{{ dish.name }}" class="dish-image" />
-      
-        <div class="dish-info">
-          <div class="big-salad">{{ dish.name }}</div>
-          <div class="r-3900">R$ {{ dish.price | number:'1.2-2' }}</div>
-        </div>
-        <input type="checkbox" (change)="toggleDishSelection(dish)" class="checkbox-icon" />
-      </li>
-    </ul>
-
-    <!-- Exibir valor total -->
-    <h4>Total: R$ {{ totalValue | number:'1.2-2' }}</h4>
-  </div>
-
-  <!-- Exibir mensagem caso não haja pratos disponíveis -->
-  <div *ngIf="filteredDishes.length === 0">
-    <p>Nenhum prato encontrado.</p>
-  </div>
-
-  <!-- Botão para enviar pedido -->
-  <div class="rectangle-group">
-    <div class="group-item">
-      <button class="adicionar" (click)="submitOrder()">Adicionar</button>
-      <span class="r-7600">R$ {{ totalValue | number:'1.2-2' }}</span>
-    </div>
-  </div>
-
-  <!-- Exibir o status do pedido após o envio -->
-  <div *ngIf="currentPedidoId">
-    <h3>Status do Pedido</h3>
-    <p>ID do Pedido: {{ currentPedidoId }}</p>
-    <p>Status Atual: {{ pedidoStatus }}</p>
-  </div>
   
+  <div class="content-card">
+    <div class="back-button" (click)="voltar()">
+      <span>←</span>
+    </div>
 
+    <div class="search-container">
+      <input 
+        type="text" 
+        placeholder="Pesquisar" 
+        [(ngModel)]="searchTerm" 
+        (input)="filterDishes()" 
+        class="search-input"
+      />
+      <span class="search-icon">🔍</span>
+    </div>
+
+    <div class="products-list">
+      <div *ngFor="let dish of filteredDishes" class="product-item">
+        <div class="product-left">
+          <img 
+            [src]="getProductImage(dish.name)" 
+            [alt]="dish.name"
+            class="product-image"
+          />
+          <div class="product-info">
+            <span class="product-name">{{dish.name}}</span>
+            <span class="product-price">R$: {{dish.price | number:'1.2-2'}}</span>
+          </div>
+        </div>
+        <input 
+          type="checkbox" 
+          (change)="toggleDishSelection(dish)" 
+          [checked]="selectedDishes.includes(dish)"
+          class="checkbox-custom"
+        />
+      </div>
+    </div>
+
+    <button class="add-button" [disabled]="selectedDishes.length === 0" (click)="submitOrder()">
+      <span>Adicionar</span>
+      <span class="total-price">R$ {{totalValue | number:'1.2-2'}}</span>
+    </button>
+  </div>
 </div>

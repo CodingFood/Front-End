@@ -1,42 +1,38 @@
-<div class="pedidos-recebidos-container">
-  <h2>Pedidos Recebidos</h2>
+<div class="pedidos-container">
+  <h1>Cozinha pedidos</h1>
+  
+  <div class="pedidos-card">
+    <button class="btn-pratos" (click)="navigateToAddDish()">Pratos</button>
 
-  <!-- Botão para cadastrar novo produto -->
-  <button (click)="navigateToAddDish()" class="btn-cadastrar-produto">Pratos</button>
+    <div class="pedidos-header">
+      <h2>Pedidos recebidos</h2>
+      <p class="data">Hoje, {{dataAtual | date:'dd/MM/yyyy'}}</p>
+    </div>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Cliente</th>
-        <th>Produtos</th>
-        <th>Status</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let pedido of pedidos">
-        <td>{{ pedido.id }}</td>
-        <td>{{ pedido.cliente || 'Cliente desconhecido' }}</td>
-        <td>
-          <ul>
-            <li *ngFor="let dish of pedido.dishes">{{ dish.name }}</li>
-          </ul>
-        </td>
-        <td>{{ pedido.status }}</td>
-        <td>
-          <!-- Checkbox para selecionar -->
+    <div class="pedidos-list">
+      <div *ngFor="let pedido of pedidos" class="pedido-item" [class.selected]="pedidoSelecionado === pedido">
+        <div class="pedido-header">
+          <span class="pedido-title">Pedido de {{pedido.cliente}}</span>
           <input 
-            type="checkbox" 
+            type="radio" 
             [checked]="pedidoSelecionado === pedido" 
-            (change)="togglePedidoSelecionado(pedido)" 
-            class="checkbox" 
+            (change)="togglePedidoSelecionado(pedido)"
+            class="radio-button"
           />
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        </div>
+        
+        <ul class="pedido-items">
+          <li *ngFor="let dish of pedido.dishes">{{dish.name}}</li>
+        </ul>
+      </div>
+    </div>
 
-  <!-- Botão para aceitar pedidos -->
-  <button (click)="aceitarPedidos()" [disabled]="!pedidoSelecionado" class="btn-aceitar-pedido">Aceitar Pedido</button>
+    <button 
+      class="btn-aceitar" 
+      [disabled]="!pedidoSelecionado"
+      (click)="aceitarPedidos()"
+    >
+      Aceitar pedido
+    </button>
+  </div>
 </div>

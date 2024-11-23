@@ -2,20 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PedidoService } from '../../services/pedido.service';
 import { Pedido } from '../../models/pedido.model';
-import { CommonModule, DatePipe } from '@angular/common';  // Importando DatePipe
-import { FormsModule } from '@angular/forms';    
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-pedido-aceito',
   templateUrl: './pedido-aceito.component.html',
   styleUrls: ['./pedido-aceito.component.css'],
-  standalone: true,  
-  imports: [CommonModule, FormsModule, DatePipe]  // Adicionando DatePipe aos imports
+  standalone: true,
+  imports: [CommonModule, FormsModule]
 })
 export class PedidoAceitoComponent implements OnInit {
-
   pedidoId!: number;
-  pedido: Pedido | null = null;  // Inicializando como null
+  pedido: Pedido | null = null;
+  dataAtual: Date = new Date();
 
   constructor(
     private route: ActivatedRoute,
@@ -27,53 +27,58 @@ export class PedidoAceitoComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.pedidoId = +params['id'];
       if (!isNaN(this.pedidoId) && this.pedidoId > 0) {
-        this.pedidoService.getPedido(this.pedidoId).subscribe(pedido => {
-          if (pedido) {
-            this.pedido = pedido;
+        this.carregarPedido();
+      }
+    });
+  }
 
-            // Se o status for "Pendente", alteramos para "Preparando"
-            if (this.pedido.status === 'Pendente') {
-              this.atualizarStatusPreparando();
-            }
-          } else {
-            console.warn('Pedido não encontrado!');
+  carregarPedido(): void {
+    this.pedidoService.getPedido(this.pedidoId).subscribe({
+      next: (pedido) => {
+        if (pedido) {
+          this.pedido = pedido;
+          if (this.pedido.status === 'Pendente') {
+            this.atualizarStatusPreparando();
           }
-        });
+        }
+      },
+      error: (error) => {
+        console.error('Erro ao carregar pedido:', error);
       }
     });
   }
 
   atualizarStatusPreparando(): void {
     if (this.pedido) {
-      this.pedidoService.updateStatus(this.pedido.id!, 'Preparando').subscribe(
-        updatedPedido => {
+      this.pedidoService.updateStatus(this.pedido.id!, 'Preparando').subscribe({
+        next: (updatedPedido) => {
           if (updatedPedido && updatedPedido.status) {
-            this.pedido!.status = updatedPedido.status;  // Atualiza localmente para "Preparando"
-            console.log('Status atualizado para Preparando');
+            this.pedido!.status = updatedPedido.status;
           }
         },
-        error => {
-          console.error('Erro ao atualizar para Preparando:', error);
+        error: (error) => {
+          console.error('Erro ao atualizar status:', error);
         }
-      );
+      });
     }
   }
 
   enviarPedido(): void {
     if (this.pedido) {
-      this.pedidoService.updateStatus(this.pedido.id!, 'Enviado').subscribe(
-        updatedPedido => {
+      this.pedidoService.updateStatus(this.pedido.id!, 'Enviado').subscribe({
+        next: (updatedPedido) => {
           if (updatedPedido && updatedPedido.status) {
-            this.pedido!.status = updatedPedido.status;  // Atualiza o status para "Enviado"
-            alert('Pedido enviado com sucesso!');
-            this.router.navigate(['/pedidos']);  // Redireciona após o envio
+            this.router.navigate(['/pedidos']);
           }
         },
-        error => {
-          console.error('Erro ao enviar o pedido:', error);
-          alert('Ocorreu um erro ao enviar o pedido. Tente novamente.');
+        error: (error) => {
+          console.error('Erro ao enviar pedido:', error);
         }
-      );
+      });
     }
+  }
+
+  voltar(): void {
+    this.router.navigate(['/pedidos']);
   }
 }

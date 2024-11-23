@@ -1,27 +1,27 @@
-<div class="pedido-aceito-container">
-  <h2>Status do Pedido</h2>
+<div class="pedido-container">
+  <h1>Pedido enviado</h1>
+  
+  <div class="pedido-card">
+    <div class="back-button" (click)="voltar()">
+      <span>←</span>
+    </div>
 
-  <p><strong>ID do Pedido:</strong> {{ pedido?.id || 'ID não disponível' }}</p>
+    <div class="pedido-header">
+      <h2>Pedido pronto</h2>
+      <p class="data">Hoje, {{dataAtual | date:'dd/MM/yyyy'}}</p>
+    </div>
 
-  <p><strong>Status Atual:</strong> {{ pedido?.status || 'Status não disponível' }}</p>
+    <div class="pedido-info">
+      <div class="pedido-cliente">
+        <h3>Pedido de {{pedido?.cliente}}</h3>
+        <ul>
+          <li *ngFor="let dish of pedido?.dishes">{{dish.name}}</li>
+        </ul>
+      </div>
+    </div>
 
-  <p><strong>Cliente:</strong> {{ pedido?.cliente ? pedido?.cliente : 'Cliente não informado' }}</p>
-
-  <p><strong>Data do Pedido:</strong> {{ pedido?.dataCriacao | date: 'dd/MM/yyyy HH:mm' }}</p>
-
-  <!-- Verificação robusta para pratos no pedido -->
-  <div *ngIf="pedido && pedido.dishes && pedido.dishes.length > 0">
-    <h3>Produtos no pedido:</h3>
-    <ul>
-      <li *ngFor="let dish of pedido.dishes">{{ dish.name }} - R$ {{ dish.price | number:'1.2-2' }}</li>
-    </ul>
+    <button class="btn-enviar" (click)="enviarPedido()">
+      Enviar pedido
+    </button>
   </div>
-
-  <!-- Exibe uma mensagem caso não haja pratos no pedido -->
-  <div *ngIf="pedido && (!pedido.dishes || pedido.dishes.length === 0)">
-    <p>Nenhum prato foi selecionado.</p>
-  </div>
-
-  <!-- Botão para enviar o pedido -->
-  <button (click)="enviarPedido()">Enviar Pedido</button>
 </div>

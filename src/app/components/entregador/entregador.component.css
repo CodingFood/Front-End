@@ -1,95 +1,160 @@
-/* Centralizar o conteúdo */
-.entregador-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* Estilos globais e container */
+.entrega-container {
+  background-color: #ffffff;
+  min-height: 100vh;
   padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
-/* Título */
-h2 {
-  font-size: 24px;
-  color: #333;
+h1 {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: normal;
   margin-bottom: 20px;
-  text-align: center;
 }
 
-/* Estilização dos cards de pedido */
-.pedido-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #f0f0f0;
-  padding: 15px;
-  margin-bottom: 15px;
+.entrega-card {
+  background-color: white;
   border-radius: 8px;
-  width: 100%;
+  padding: 20px;
   max-width: 400px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Conteúdo do card */
-.card-content {
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
+  gap: 24px;
+}
+
+/* Estilos da primeira tela (seleção de endereço) */
+.pedido-item {
+  width: 100%;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.pedido-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.pedido-content p {
+  margin: 0;
+  color: #000;
+}
+
+.radio-button {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #e0e0e0;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+.radio-button:checked {
+  border-color: #ff3b30;
+}
+
+.radio-button:checked::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: #ff3b30;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.motoboy-illustration {
+  width: 100%;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.motoboy-img {
+  width: 150px;
+  height: auto;
+}
+
+/* Estilos da segunda tela (confirmação) */
+.confirmacao-header {
   text-align: left;
 }
 
-/* Checkbox alinhado à direita */
-.pedido-card input[type="checkbox"] {
-  margin-left: auto;
+.confirmacao-header h2 {
+  font-size: 1.2rem;
+  margin: 0;
+  color: #000;
+  font-weight: 500;
 }
 
-/* Label para o checkbox */
-.pedido-card label {
-  margin-left: 10px;
+.entrega-hora {
+  font-size: 1.1rem;
+  color: #000;
+  margin: 4px 0 0 0;
+  font-weight: 500;
 }
 
-/* Botão para marcar como entregue */
-.btn-entregue {
-  background-color: #ea1818;
-  color: #fff;
-  padding: 10px 20px;
+.pedido-info {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.pedido-info h3 {
+  font-size: 1rem;
+  color: #000;
+  margin: 0 0 4px 0;
+}
+
+.pedido-info p {
+  margin: 0;
+  color: #000;
+}
+
+.check-circle {
+  width: 80px;
+  height: 80px;
+  background-color: #4CAF50;
+  border-radius: 50%;
+  margin: 20px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.check-circle svg {
+  width: 40px;
+  height: 40px;
+  fill: white;
+}
+
+/* Botões */
+.btn-entregue,
+.btn-proxima-entrega {
+  background-color: #ff3b30;
+  color: white;
   border: none;
-  border-radius: 5px;
-  font-size: 16px;
+  border-radius: 8px;
+  padding: 16px;
+  width: 100%;
+  font-size: 1rem;
   cursor: pointer;
-  margin-top: 20px;
+  transition: background-color 0.2s;
 }
 
 .btn-entregue:disabled {
-  background-color: #ccc;
+  background-color: #eee;
+  color: #999;
   cursor: not-allowed;
 }
 
-/* Tela de confirmação de entrega */
-.entrega-confirmacao {
-  text-align: center;
-  padding: 20px;
-}
-
-.pedido-detalhes {
-  background-color: #f0f0f0;
-  padding: 15px;
-  border-radius: 8px;
-  margin: 15px 0;
-}
-
-/* Ícone de confirmação */
-.confirmacao-icone img {
-  width: 50px;
-  height: 50px;
-  margin-top: 20px;
-}
-
-/* Botão de próxima entrega */
-.btn-voltar {
-  background-color: #ea1818;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 20px;
+.btn-entregue:hover:not(:disabled),
+.btn-proxima-entrega:hover {
+  background-color: #ff1f1f;
 }

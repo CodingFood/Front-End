@@ -1,87 +1,104 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PedidoService } from '../../services/pedido.service';
 import { Pedido } from '../../models/pedido.model';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Subscription, interval } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-entregador',
   templateUrl: './entregador.component.html',
   styleUrls: ['./entregador.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule],
-  providers: [DatePipe]  // Certifique-se de adicionar o DatePipe aos providers
+  imports: [CommonModule, FormsModule]
 })
-export class EntregadorComponent implements OnInit {
-
+export class EntregadorComponent implements OnInit, OnDestroy {
   pedidosEnviados: Pedido[] = [];
-  pedidosSelecionados: Pedido[] = [];
-  pedidoEntregue: Pedido | null = null;  // Para armazenar o pedido entregue
-  entregaHora: string = '';  // Hora da entrega
+  pedidoSelecionado: Pedido | null = null;
+  pedidoEntregue: Pedido | null = null;
+  entregaHora: string = '';
+  atualizacaoSubscription?: Subscription;
 
-  constructor(private pedidoService: PedidoService, private datePipe: DatePipe) { }
+  constructor(
+    private pedidoService: PedidoService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
-    this.getPedidosEnviados();
-
-    // Atualizar a lista de pedidos a cada 5 segundos
-    setInterval(() => {
-      this.getPedidosEnviados();
-    }, 5000);
+    this.carregarPedidos();
+    this.iniciarAtualizacaoAutomatica();
   }
 
-  // Função para buscar pedidos enviados
-  getPedidosEnviados(): void {
-    this.pedidoService.getPedidosByStatus('Enviado').subscribe(
-      pedidos => {
-        console.log("Pedidos enviados recebidos:", pedidos);
+  ngOnDestroy(): void {
+    if (this.atualizacaoSubscription) {
+      this.atualizacaoSubscription.unsubscribe();
+    }
+  }
+
+  carregarPedidos(): void {
+    this.pedidoService.getPedidosByStatus('Enviado').subscribe({
+      next: (pedidos) => {
         this.pedidosEnviados = pedidos;
       },
-      error => {
-        console.error("Erro ao buscar pedidos enviados:", error);
+      error: (error) => {
+        console.error('Erro ao carregar pedidos:', error);
       }
-    );
+    });
   }
 
-  // Alternar seleção de pedidos
+  iniciarAtualizacaoAutomatica(): void {
+    if (!this.pedidoEntregue) {  // Só atualiza se não estiver na tela de confirmação
+      this.atualizacaoSubscription = interval(5000)
+        .pipe(
+          switchMap(() => this.pedidoService.getPedidosByStatus('Enviado'))
+        )
+        .subscribe({
+          next: (pedidos) => {
+            this.pedidosEnviados = pedidos;
+          },
+          error: (error) => {
+            console.error('Erro ao atualizar pedidos:', error);
+          }
+        });
+    }
+  }
+
   togglePedidoSelecionado(pedido: Pedido): void {
-    const pedidoJaSelecionado = this.pedidosSelecionados.find(p => p.id === pedido.id);
-
-    if (pedidoJaSelecionado) {
-      // Remove o pedido da lista se ele já estiver selecionado
-      this.pedidosSelecionados = this.pedidosSelecionados.filter(p => p.id !== pedido.id);
+    if (this.pedidoSelecionado === pedido) {
+      this.pedidoSelecionado = null;
     } else {
-      // Adiciona o pedido à lista se ele não estiver selecionado
-      this.pedidosSelecionados.push(pedido);
+      this.pedidoSelecionado = pedido;
     }
-
-    // Atualiza o estado de 'selecionado' do pedido
-    pedido.selecionado = !pedido.selecionado;
-
-    // Log para verificar os pedidos selecionados
-    console.log("Pedidos selecionados:", this.pedidosSelecionados);
   }
 
-  // Função para marcar pedidos como "Entregue" e exibir a tela de confirmação
   marcarComoEntregue(): void {
-    if (this.pedidosSelecionados.length === 1) {  // Exemplo: entregando um pedido de cada vez
-      const pedido = this.pedidosSelecionados[0];
-      this.pedidoService.updateStatus(pedido.id!, 'Entregue').subscribe(updatedPedido => {
-        console.log(`Pedido ${pedido.id} marcado como Entregue.`);
-        pedido.status = updatedPedido.status;
-        this.pedidosEnviados = this.pedidosEnviados.filter(p => p.id !== pedido.id);
-        this.pedidoEntregue = pedido;  // Exibir o pedido entregue
-        this.entregaHora = this.datePipe.transform(new Date(), 'HH:mm') || '';  // Captura a hora da entrega
-      });
-    }
+    if (!this.pedidoSelecionado) return;
 
-    // Limpar a seleção
-    this.pedidosSelecionados = [];
+    this.pedidoService.updateStatus(this.pedidoSelecionado.id!, 'Entregue')
+      .subscribe({
+        next: (pedidoAtualizado) => {
+          this.pedidoEntregue = this.pedidoSelecionado;
+          this.entregaHora = new Date().toLocaleTimeString('pt-BR', {
+            hour: '2-digit',
+            minute: '2-digit'
+          });
+          this.pedidosEnviados = this.pedidosEnviados.filter(
+            p => p.id !== this.pedidoSelecionado!.id
+          );
+          this.pedidoSelecionado = null;
+        },
+        error: (error) => {
+          console.error('Erro ao marcar pedido como entregue:', error);
+        }
+      });
   }
 
-  // Função para voltar à lista de pedidos após a confirmação da entrega
   voltarParaPedidos(): void {
-    this.pedidoEntregue = null;  // Limpar o pedido entregue para voltar à lista
-    this.getPedidosEnviados();   // Recarregar os pedidos enviados
+    this.pedidoEntregue = null;
+    this.entregaHora = '';
+    this.carregarPedidos();
+    this.iniciarAtualizacaoAutomatica();
   }
 }

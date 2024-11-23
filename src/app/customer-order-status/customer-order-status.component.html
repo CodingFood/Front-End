@@ -1,24 +1,31 @@
-<div class="customer-order-status-container">
-  <h2>Status do Pedido</h2>
+<div class="status-container">
+  <h1>Status cliente</h1>
+  
+  <div class="status-card">
+    <div class="back-button" (click)="voltar()">
+      <span>←</span>
+    </div>
 
-  <p><strong>Status Atual:</strong> {{ pedidoStatus }}</p>
-  <p><strong>Data do Pedido:</strong> {{ pedido?.dataCriacao | date:'dd/MM/yyyy HH:mm' }}</p>
+    <div class="status-header">
+      <h2>Status do pedido</h2>
+      <p class="data">Hoje, {{dataAtual | date:'dd/MM/yyyy'}}</p>
+    </div>
 
-  <!-- Verificar se 'dishes' está definido e vazio -->
-  <div *ngIf="pedido && pedido.dishes && pedido.dishes.length === 0">
-    <p>Nenhum prato foi selecionado.</p>
+    <div class="status-progress">
+      <span class="icon">{{statusIcone}}</span>
+      <span class="status-text">{{statusMensagem}}</span>
+    </div>
+
+    <div class="pedido-info">
+      <h3>Seu pedido,</h3>
+      <ul>
+        <li *ngFor="let dish of pedido?.dishes">{{dish.name}}</li>
+      </ul>
+      <p class="total">Total: R$ {{pedido?.total | number:'1.2-2'}}</p>
+    </div>
+
+    <button class="btn-novo-pedido" (click)="novoPedido()">
+      Novo pedido
+    </button>
   </div>
-
-  <!-- Verificar se há pratos selecionados -->
-  <div *ngIf="pedido && pedido.dishes && pedido.dishes.length > 0">
-    <h3>Produtos no pedido:</h3>
-    <ul>
-      <li *ngFor="let dish of pedido.dishes">{{ dish.name }} - R$ {{ dish.price | number:'1.2-2' }}</li>
-    </ul>
-  </div>
-
-   <!--<h3>Status do Pedido: {{ pedidoStatus }}</h3>-->
-
-  <!-- Botão para criar um novo pedido -->
-  <button (click)="novoPedido()">Novo Pedido</button>
 </div>

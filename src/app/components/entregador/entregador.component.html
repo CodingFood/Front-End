@@ -1,50 +1,64 @@
-<div class="entregador-container">
-  <h2 *ngIf="!pedidoEntregue">Pedidos Enviados</h2>
-
-  <!-- Exibir os pedidos enviados -->
+<div class="entrega-container">
+  <!-- Tela de Seleção de Endereço -->
   <div *ngIf="!pedidoEntregue">
-    <div *ngFor="let pedido of pedidosEnviados" class="pedido-card">
-      <div class="card-content">
-        <p><strong>ID do Pedido:</strong> {{ pedido.id }}</p>
-        <p><strong>Cliente:</strong> {{ pedido.cliente || 'Cliente não informado' }}</p>
-        <p><strong>Endereço:</strong> {{ pedido.endereco || 'Endereço não informado' }}</p>
+    <h1>Entregar em</h1>
+    
+    <div class="entrega-card">
+      <div class="pedido-item" *ngFor="let pedido of pedidosEnviados">
+        <div class="pedido-content">
+          <div>
+            <p>{{pedido.endereco}}</p>
+          </div>
+          <input 
+            type="radio" 
+            [checked]="pedidoSelecionado === pedido" 
+            (change)="togglePedidoSelecionado(pedido)" 
+            class="radio-button"
+          />
+        </div>
       </div>
 
-      <!-- Checkbox para selecionar o pedido -->
-      <input 
-        type="checkbox" 
-        [checked]="pedidosSelecionados.includes(pedido)" 
-        (change)="togglePedidoSelecionado(pedido)" 
-      />
-    </div>
+      <div class="motoboy-illustration">
+        <img src="assets/images/Entregador.png" alt="Motoboy" class="motoboy-img" />
+      </div>
 
-    <!-- Botão para marcar como entregue -->
-    <button 
-      (click)="marcarComoEntregue()" 
-      class="btn-entregue" 
-      [disabled]="pedidosSelecionados.length === 0">
-      Marcar como Entregue
-    </button>
+      <button 
+        class="btn-entregue" 
+        [disabled]="!pedidoSelecionado"
+        (click)="marcarComoEntregue()"
+      >
+        Pedido entregue
+      </button>
+    </div>
   </div>
 
-  <!-- Tela de confirmação de entrega -->
-  <div *ngIf="pedidoEntregue" class="entrega-confirmacao">
-    <h2>Pedido entregue!</h2>
-    <p><strong>Hora da entrega:</strong> {{ entregaHora }}</p>
+  <!-- Tela de Confirmação de Entrega -->
+  <div *ngIf="pedidoEntregue">
+    <h1>Pedido entregue</h1>
+    
+    <div class="entrega-card">
+      <div class="confirmacao-header">
+        <h2>Pedido entregue!</h2>
+        <p class="entrega-hora">Hoje, {{entregaHora}}</p>
+      </div>
 
-    <div class="pedido-detalhes">
-      <p><strong>Para:</strong> {{ pedidoEntregue.cliente }}</p>
-      <p><strong>Endereço:</strong> {{ pedidoEntregue.endereco }}</p>
+      <div class="pedido-info">
+        <h3>Para {{pedidoEntregue.cliente}}</h3>
+        <p>{{pedidoEntregue.endereco}}</p>
+      </div>
+
+      <div class="check-circle">
+        <svg viewBox="0 0 24 24">
+          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+        </svg>
+      </div>
+
+      <button 
+        class="btn-proxima-entrega"
+        (click)="voltarParaPedidos()"
+      >
+        Próxima entrega
+      </button>
     </div>
-
-    <!-- Ícone de confirmação de entrega -->
-    <div class="confirmacao-icone">
-      <img src="/src/assets/images/checkmark.png" alt="Entrega confirmada" />
-    </div>
-
-    <!-- Botão para voltar à lista de pedidos -->
-    <button (click)="voltarParaPedidos()" class="btn-voltar">
-      Próxima entrega
-    </button>
   </div>
 </div>
