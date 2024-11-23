@@ -59,7 +59,7 @@ label {
 button {
   background-color: #ea1818;
   color: #fff;
-  padding: 12px 20px;
+  padding: 12px 10px;
   border: none;
   border-radius: 5px;
   font-size: 18px;
@@ -78,7 +78,7 @@ button:hover {
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
-  max-width: 400px;
+  max-width: 370px;
   height: auto;
   object-fit: cover;
   border-radius: 0;
