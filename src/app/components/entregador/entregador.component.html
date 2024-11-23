@@ -1,34 +1,44 @@
 <div class="entrega-container">
   <!-- Tela de Seleção de Endereço -->
   <div *ngIf="!pedidoEntregue">
-    <h1>Entregar em</h1>
+    <h1 class="h2Novo">Entregar em</h1>
     
     <div class="entrega-card">
-      <div class="pedido-item" *ngFor="let pedido of pedidosEnviados">
-        <div class="pedido-content">
-          <div>
-            <p>{{pedido.endereco}}</p>
+      <!-- Estado com pedidos -->
+      <ng-container *ngIf="pedidosEnviados.length > 0">
+        <div class="pedido-item" *ngFor="let pedido of pedidosEnviados">
+          <div class="pedido-content">
+            <div>
+              <h3>Entregar em</h3>
+              <p>{{pedido.endereco}}</p>
+            </div>
+            <input 
+              type="radio" 
+              [checked]="pedidoSelecionado === pedido" 
+              (change)="togglePedidoSelecionado(pedido)" 
+              class="radio-button"
+            />
           </div>
-          <input 
-            type="radio" 
-            [checked]="pedidoSelecionado === pedido" 
-            (change)="togglePedidoSelecionado(pedido)" 
-            class="radio-button"
-          />
         </div>
-      </div>
 
-      <div class="motoboy-illustration">
-        <img src="assets/images/Entregador.png" alt="Motoboy" class="motoboy-img" />
-      </div>
+        <div class="motoboy-illustration">
+          <img src="assets/images/Entregador.png" alt="Motoboy" class="motoboy-img" />
+        </div>
 
-      <button 
-        class="btn-entregue" 
-        [disabled]="!pedidoSelecionado"
-        (click)="marcarComoEntregue()"
-      >
-        Pedido entregue
-      </button>
+        <button 
+          class="btn-entregue" 
+          [disabled]="!pedidoSelecionado"
+          (click)="marcarComoEntregue()"
+        >
+          Pedido entregue
+        </button>
+      </ng-container>
+
+      <!-- Estado vazio -->
+      <div *ngIf="pedidosEnviados.length === 0" class="empty-state">
+        <div class="loading-spinner"></div>
+        <p class="empty-message">Aguardando novas rotas</p>
+      </div>
     </div>
   </div>
 

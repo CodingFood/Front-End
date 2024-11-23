@@ -49,7 +49,7 @@ export class EntregadorComponent implements OnInit, OnDestroy {
   }
 
   iniciarAtualizacaoAutomatica(): void {
-    if (!this.pedidoEntregue) {  // Só atualiza se não estiver na tela de confirmação
+    if (!this.pedidoEntregue) {
       this.atualizacaoSubscription = interval(5000)
         .pipe(
           switchMap(() => this.pedidoService.getPedidosByStatus('Enviado'))
