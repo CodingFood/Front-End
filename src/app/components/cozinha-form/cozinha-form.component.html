@@ -1,7 +1,0 @@
-<h2>{{ isEdit ? 'Editar Cozinha' : 'Adicionar Cozinha' }}</h2>
-<form (ngSubmit)="saveCozinha()">
-  <label for="tipo">Tipo de Cozinha:</label>
-  <input type="text" id="tipo" [(ngModel)]="cozinha.tipo" name="tipo" required>
-
-  <button type="submit">{{ isEdit ? 'Atualizar' : 'Adicionar' }}</button>
-</form>

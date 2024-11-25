@@ -5,9 +5,6 @@ import { provideRouter, Routes } from '@angular/router';
 // Importação dos componentes necessários
 import { DishListComponent } from './components/dish-list/dish-list.component';
 import { DishFormComponent } from './components/dish-form/dish-form.component';
-import { ClienteFormComponent } from './components/cliente-form/cliente-form.component';
-import { CozinhaFormComponent } from './components/cozinha-form/cozinha-form.component';
-import { PedidoFormComponent } from './components/pedido-form/pedido-form.component';
 import { CustomerProductListComponent } from './components/customer-product-list/customer-product-list.component'; 
 import { PedidoListComponent } from './components/pedido-list/pedido-list.component';
 import { CustomerIdentificationComponent } from './components/customer-identification/customer-identification.component'; 
@@ -24,12 +21,6 @@ const routes: Routes = [
   { path: 'customer-order-status', component: CustomerOrderStatusComponent },  
   { path: 'add-dish', component: DishFormComponent },
   { path: 'edit-dish/:id', component: DishFormComponent },
-  { path: 'add-cliente', component: ClienteFormComponent },
-  { path: 'edit-cliente/:id', component: ClienteFormComponent },
-  { path: 'add-cozinha', component: CozinhaFormComponent },
-  { path: 'edit-cozinha/:id', component: CozinhaFormComponent },
-  { path: 'add-pedido', component: PedidoFormComponent },
-  { path: 'edit-pedido/:id', component: PedidoFormComponent },
   { path: 'pedidos', component: PedidoListComponent },
   { path: 'entregador', component: EntregadorComponent },
   { path: 'dish-list', component: DishListComponent },
